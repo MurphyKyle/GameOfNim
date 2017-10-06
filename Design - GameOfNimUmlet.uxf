@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>549</x>
-      <y>117</y>
+      <x>558</x>
+      <y>126</y>
       <w>432</w>
       <h>207</h>
     </coordinates>
@@ -27,7 +27,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>0</x>
+      <x>9</x>
       <y>90</y>
       <w>531</w>
       <h>378</h>
@@ -58,7 +58,7 @@ _-isValidInt(userInput : String) : boolean_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>0</x>
+      <x>9</x>
       <y>495</y>
       <w>459</w>
       <h>234</h>
@@ -80,7 +80,7 @@ _-isValidInt(userInput : String) : boolean_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>522</x>
+      <x>531</x>
       <y>531</y>
       <w>288</w>
       <h>162</h>
@@ -101,7 +101,7 @@ HARD
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>135</x>
+      <x>144</x>
       <y>0</y>
       <w>234</w>
       <h>72</h>
@@ -114,7 +114,7 @@ _+main(args : string[] : void_</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>0</x>
+      <x>9</x>
       <y>756</y>
       <w>513</w>
       <h>180</h>
@@ -131,8 +131,8 @@ _+promptUserForMenuChoice(options : String[]) : String_</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>522</x>
-      <y>198</y>
+      <x>531</x>
+      <y>207</y>
       <w>45</w>
       <h>27</h>
     </coordinates>
@@ -142,7 +142,7 @@ _+promptUserForMenuChoice(options : String[]) : String_</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>270</x>
+      <x>225</x>
       <y>459</y>
       <w>27</w>
       <h>54</h>
@@ -153,9 +153,9 @@ _+promptUserForMenuChoice(options : String[]) : String_</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>549</x>
-      <y>387</y>
-      <w>387</w>
+      <x>558</x>
+      <y>351</y>
+      <w>432</w>
       <h>81</h>
     </coordinates>
     <panel_attributes>view.InstructionBox
@@ -168,11 +168,11 @@ _+show(displayData : ArrayList&lt;String&gt;) : void_</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>522</x>
-      <y>414</y>
-      <w>45</w>
+      <y>378</y>
+      <w>54</w>
       <h>27</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;30.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;40.0;10.0</additional_attributes>
   </element>
 </diagram>
