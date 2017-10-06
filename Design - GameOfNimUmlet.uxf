@@ -32,7 +32,7 @@
       <w>531</w>
       <h>378</h>
     </coordinates>
-    <panel_attributes>app.NimController
+    <panel_attributes>control.NimController
 -
 _-turnVal : int_
 _-difficulty : Enum_
@@ -106,7 +106,7 @@ HARD
       <w>234</w>
       <h>72</h>
     </coordinates>
-    <panel_attributes>app.Driver
+    <panel_attributes>control.Driver
 -
 _+main(args : string[] : void_</panel_attributes>
     <additional_attributes/>
