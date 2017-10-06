@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>9</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>549</x>
+      <y>117</y>
+      <w>432</w>
+      <h>207</h>
+    </coordinates>
+    <panel_attributes>models.Player
+-
+-playerName
+-isHumanPlayer
+-
++Player(name : String) &lt;&lt;ctor&gt;&gt;
++getName() : String
++setName(name : String) : void
++setIsHumanPlayer(isHumanPlayer : boolean) : void
+
++toString() : String @Override
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>90</y>
+      <w>531</w>
+      <h>378</h>
+    </coordinates>
+    <panel_attributes>app.NimController
+-
+_-turnVal : int_
+_-difficulty : Enum_
+_-players : Player[]_
+_-gameBoard : GameBoard_
+_-instructionBox : InstructionBox_
+_-PLAYER_ONE_TURN_VAL : int &lt;&lt;final&gt;&gt;_
+_-PLAYER_TWO_TURN_VAL : int &lt;&lt;final&gt;&gt;_
+-
+_+runApp() : void_
+_-playGame() : void_
+_-isValidMoveInput(userInput : String) : boolean_
+_-isValidMove(rowNumber : int, tokenCount : int) : boolean_
+_-generateValidRandomMove() : int[]_
+_-isGameOver() : boolean_
+_-isValidDifficultyChoice(userInput : String) : boolean_
+_-isValidPlayerName(userInput : String) : boolean_
+_-isValidInt(userInput : String) : boolean_
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>495</y>
+      <w>459</w>
+      <h>234</h>
+    </coordinates>
+    <panel_attributes>models.GameBoard
+-
+-rows : int[]
+-difficulty : Enum &lt;&lt;final&gt;&gt;
+-
++GameBoard(difficulty : Difficulty) &lt;&lt;ctor&gt;&gt;
++getRowTokenValue(rowNumber : int) : int
++getNumOfRows() : int
++takeTokens(rowNumber : int, numOfTokens : int) : void
+
++toString() : String @Override
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>522</x>
+      <y>531</y>
+      <w>288</w>
+      <h>162</h>
+    </coordinates>
+    <panel_attributes>enums.Difficulty
+-
+EASY
+MEDIUM
+HARD
+-rowTokenCounts : int[]
+-
+-Difficulty(rowTokenCounts : int[]) &lt;&lt;ctor&gt;&gt;
++getRowTokenCounts() : int[]
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>135</x>
+      <y>0</y>
+      <w>234</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>app.Driver
+-
+_+main(args : string[] : void_</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>756</y>
+      <w>513</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>view.Console
+-
+_+writeLine(message : String) : void_
+_+writeCollection(messages : ArrayList&lt;T&gt;) : void_
+_+readLine() : String_
+_+promptUserForInput(prompt : String) : String_
+_+promptUserForMenuChoice(options : String[]) : String_</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>522</x>
+      <y>198</y>
+      <w>45</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;30.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>270</x>
+      <y>459</y>
+      <w>27</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>549</x>
+      <y>387</y>
+      <w>387</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>view.InstructionBox
+-
+_+show(displayData : String) : void_
+_+show(displayData : ArrayList&lt;String&gt;) : void_</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>522</x>
+      <y>414</y>
+      <w>45</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;30.0;10.0</additional_attributes>
+  </element>
+</diagram>
