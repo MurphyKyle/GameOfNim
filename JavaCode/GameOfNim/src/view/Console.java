@@ -4,29 +4,97 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.List;
 
-public class Console {
+import javafx.application.Application;
+
+public class Console {	
+	public static void main(String[] args) {
+		
+		
+//		test
+//		String[] strRay = new String[] {"Hey,", "this", "stuff", "WORKS!!!"};
+//		ArrayList<String> list = new ArrayList<>();
+//		list.add("Hey,");
+//		list.add("this");
+//		list.add("stuff");
+//		list.add("WORKS!!");
+//		
+//		writeLine("writeLine");
+//		writeLine("Write collection: ");
+//		writeCollection(list);
+//		writeLine("Prompt for input");
+//		writeLine("Text result: " + promptUserForInput("enter text"));
+//		writeLine("Text result: " + promptUserForMenuChoice(strRay));
+		
+	}
+
+	/**
+	 * Writes a single message to the console with a carriage return
+	 * @param message - The String message to be displayed to the user
+	 * @return None
+	 */
 	public static void writeLine(String message) {
 		System.out.println(message);
 	}
-	public static <T> void writeCollection(List<T> messages) {
-		messages.stream().forEach(m -> System.out.println(m));
+	
+	
+	/**
+	 * Writes each message from a collection. Each message is written on 
+	 * its own line and is followed by a carriage return
+	 * @param messages - The collection of messages to be displayed to the user
+	 * @return None
+	 */
+	public static <T> void writeCollection(ArrayList<T> messages) {
+
+		for (T obj : messages) {
+			System.out.println(String.valueOf(obj));
+		}
 	}
-	public static String readLine() throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		return br.readLine();
+	
+	
+	/**
+	 * Reads a single line as String input from the windows console
+	 * @param None
+	 * @return The String retrieved from the windows console
+	 */
+	public static String readLine() {
+		String result = null;
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		
+		try {
+//		try(BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+			result = reader.readLine(); 
+		} catch (IOException e) {
+			System.err.println("Something went wrong!");
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
-	public static String promptUserForInput(String Prompt) throws IOException {
-		writeLine(Prompt);
+	
+	
+	/**
+	 * Asks the user a question and waits for their response
+	 * @param prompt - The String question to pose to the user via the windows console
+	 * @return The String retrieved from the windows console representing the user's choice
+	 */
+	public static String promptUserForInput(String prompt) {
+		writeLine(prompt);
 		return readLine();
 	}
-	public static String promptUserForMenuChoice(String[] options) throws IOException {
-		List<String> messages = new ArrayList<>();
-		for(String s : options) {
-			messages.add(s);
+	
+	
+	/**
+	 * Prints out a collection of options for the user to choose from, and waits for their response
+	 * @param options - String[] containing the collection of options to 
+	 * display to the user at the windows console
+	 * @return The String retrieved from the windows console representing the user's choice
+	 */
+	public static String promptUserForMenuChoice(String[] options) {
+		for (String s : options) {
+			writeLine(s);
 		}
-		writeCollection(messages);
+		
 		return readLine();
 	}
 }
