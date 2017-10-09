@@ -2,17 +2,18 @@ package control;
 
 import java.io.IOException;
 
+import enums.Difficulty;
 import model.GameBoard;
 import model.Player;
 import view.Console;
 import view.InstructionBox;
 
 public class NimController {
-	private int turnVal;
-	private Enum difficulty;
+	private static int turnVal;
+	private static Enum difficulty;
 	private static Player[] players = new Player[2];
-	private GameBoard gameBoard;
-	private InstructionBox instructionBox;
+	private static GameBoard gameBoard;
+	private static InstructionBox instructionBox;
 	private static final int PLAYER_ONE_TURN_VAL = 0;
 	private static final int PLAYER_TWO_TURN_VAL = 1;
 
@@ -40,10 +41,10 @@ public class NimController {
 					playerChoice = Console.promptUserForMenuChoice(versus);
 				}while(!isValidInt(playerChoice));
 				executable = Integer.parseInt(playerChoice);
-				if(executable < 1 && executable > 2) {
+				if(executable < 1  || executable > 2) {
 					Console.writeLine("\n!!! The number input excedes the bounds of the options !!!\n");
 				}
-			}while(executable != 1 || executable != 2);
+			}while(executable != 1 & executable != 2);
 			
 			do {
 				playerChoice = Console.promptUserForInput("What will be Player 1's name?");
@@ -60,23 +61,32 @@ public class NimController {
 				}
 			}while(!isValidPlayerName(playerChoice));
 			
-			//remove after Testing
-			Console.writeLine("Welcome, " + players[0] + " and " + players[1]);
+			do {
+				Console.writeLine("What difficulty setting would you prefer: ");
+				playerChoice = Console.promptUserForMenuChoice(difficulty);
+			}while(!isValidDifficultyChoice(playerChoice));
+			
+			String[] first = {
+					"1) " + players[0],
+					"2) " + players[1]
+			};
 			
 			do {
 				do {
-					Console.writeLine("What difficulty setting would you prefer: ");
-					playerChoice = Console.promptUserForMenuChoice(difficulty);
-				}while(!isValidDifficultyChoice(playerChoice));
+					Console.writeLine("Who will go first: ");
+					playerChoice = Console.promptUserForMenuChoice(first);
+				}while(!isValidInt(playerChoice));
 				executable = Integer.parseInt(playerChoice);
-				if(executable < 1 && executable > 3) {
+				if(executable < 1  || executable > 2) {
 					Console.writeLine("\n!!! The number input excedes the bounds of the options !!!\n");
 				}
-			}while(executable != 1 || executable != 2 || executable != 3);
+			}while(executable != 1 & executable != 2);
 			
+			turn = executable - 1;
 			
-			
-			
+			do {
+				playGame();
+			}while(!isGameOver());			
 		}
 	}
 	private static void playGame() {
@@ -96,22 +106,40 @@ public class NimController {
 		return null;
 	}
 	private static boolean isGameOver() {
-		
-		return false;
+		boolean allEmpty = false;
+		for(int i = 0; i < gameBoard.getNumOfRows(); i++) {
+			if(gameBoard.getRowTokenValue(i) == 0) {
+				allEmpty = true;
+			}else {
+				return false;
+			}
+		}
+		return allEmpty;
 	}
 	private static boolean isValidDifficultyChoice(String userInput) {
 		
 		switch(userInput) {
-			case "1":
-				break;
 		
+		case "1":
+			gameBoard = new GameBoard(Difficulty.Easy);
+			break;
+			
+		case "2":
+			gameBoard = new GameBoard(Difficulty.Medium);
+			break;
+			
+		case "3":
+			gameBoard = new GameBoard(Difficulty.Hard);
+			break;
+			
+		default:
+			Console.writeLine("\n!!! The option you requested does not exist. !!!\n!!! Please be sure you input a number between 1 and 3 !!!\n");
+			return false;
 		}
-		
-		
-		
-		return false;
+		return true;
 	}
 	private static boolean isValidPlayerName(String userInput) {
+		userInput.trim();
 		if(userInput.length() > 0 && userInput != null) {
 			return true;
 		}
