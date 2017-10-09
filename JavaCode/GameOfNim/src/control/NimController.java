@@ -118,12 +118,8 @@ public class NimController {
 			String[] split = new String[2];
 			do {
 				do {
-					try {
-						response = Console.promptUserForInput(
-								players[turnVal] + ") Please input your action in to format: row, amount");
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
+					response = Console.promptUserForInput(
+							players[turnVal] + ") Please input your action in to format: row, amount");
 				} while (!isValidMoveInput(response));
 
 				split = response.split(",");
@@ -208,15 +204,15 @@ public class NimController {
 		switch(userInput) {
 		
 		case "1":
-			gameBoard = new GameBoard(Difficulty.Easy);
+			gameBoard = new GameBoard(Difficulty.EASY);
 			break;
 			
 		case "2":
-			gameBoard = new GameBoard(Difficulty.Medium);
+			gameBoard = new GameBoard(Difficulty.MEDIUM);
 			break;
 			
 		case "3":
-			gameBoard = new GameBoard(Difficulty.Hard);
+			gameBoard = new GameBoard(Difficulty.HARD);
 			break;
 			
 		default:
