@@ -5,29 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-//import javafx.application.Application;
-
 public class Console {	
-	public static void main(String[] args) {
-		
-		
-//		test
-//		String[] strRay = new String[] {"Hey,", "this", "stuff", "WORKS!!!"};
-//		ArrayList<String> list = new ArrayList<>();
-//		list.add("Hey,");
-//		list.add("this");
-//		list.add("stuff");
-//		list.add("WORKS!!");
-//		
-//		writeLine("writeLine");
-//		writeLine("Write collection: ");
-//		writeCollection(list);
-//		writeLine("Prompt for input");
-//		writeLine("Text result: " + promptUserForInput("enter text"));
-//		writeLine("Text result: " + promptUserForMenuChoice(strRay));
-		
-	}
-
 	/**
 	 * Writes a single message to the console with a carriage return
 	 * @param message - The String message to be displayed to the user

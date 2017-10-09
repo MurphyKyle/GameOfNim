@@ -1,61 +1,58 @@
 package view;
 
-import java.util.ArrayList;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Panel;
 
-import javafx.application.Application;
-import javafx.geometry.Pos;
-import javafx.scene.control.Label;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
+import javax.swing.BorderFactory;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
+import javax.swing.border.Border;
 
-
-public class InstructionBox extends Application {
-
+public class InstructionBox {
 	/**
-	 * Displays an un-closeable window to display the given String value to the user
+	 * Displays an un-closeable window to display the InstructionBox to the user
 	 * @param displayData
 	 * @return None
 	 */
-	public static void show(String displayData) {
-		Stage stage = new Stage();
-		stage.setTitle("Game of Nim");
-		stage.setWidth(300.0);
-		stage.setHeight(400.0);
+	public static void show() {
+		Border paddingBorder = BorderFactory.createEmptyBorder(10,10,10,10);
 		
-		VBox vbox = new VBox();
-		vbox.setAlignment(Pos.CENTER);
+		JFrame frame = new JFrame("Game of Nim");
+		frame.setSize(520, 400);
+		frame.setResizable(false);
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
-		Label lblWelcome = new Label();
-		lblWelcome.setAlignment(Pos.CENTER);
+		Panel panel = new Panel(new BorderLayout());
+		panel.setSize(frame.getWidth() - 10, frame.getHeight() - 10);
+		panel.setBackground(Color.LIGHT_GRAY);
+		
+		JLabel lblWelcome = new JLabel();
+		lblWelcome.setBorder(paddingBorder);
+		lblWelcome.setFont(new Font("Arial",0, 26));
+		lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
 		lblWelcome.setText("Welcome to the Game of Nim!");
 		
-		Region region = new Region();
+		StringBuilder sb = new StringBuilder();
+		sb.append("<html>");
+		sb.append("Instructions for gameplay:<br><br>");
+		sb.append("You must take no less than one token, and can take no more than what is currently in that row<br><br>");
+		sb.append("The tokens must be taken out of one single row each turn<br><br>");
+		sb.append("The loser is the player who takes the last token on the game<br>");
+		sb.append("</html>");
 		
-		Label lblInstructions = new Label();
-		lblInstructions.setAlignment(Pos.CENTER);
-		lblInstructions.setText(displayData);
+		JLabel lblInstructions = new JLabel();
+		lblInstructions.setBorder(paddingBorder);		
+		lblInstructions.setFont(new Font("Arial", 0, 22));
+		lblInstructions.setText(sb.toString());		
 		
-		vbox.getChildren().addAll(lblWelcome, region, lblInstructions);
+		panel.add(lblWelcome, BorderLayout.NORTH);
+		panel.add(lblInstructions, BorderLayout.CENTER);
 		
-		StackPane pane = new StackPane();
-		pane.getChildren().add(vbox);
-	}
-
-	
-	/**
-	 * Displays an un-closeable window to display the given collection of Strings to the user
-	 * @param messages - The collection of Strings to display to the user
-	 * @return None
-	 */
-	public static void show(ArrayList<String> messages) {
-		
-	}
-
-
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		
+		frame.add(panel);
+		frame.setVisible(true);
 	}
 }
