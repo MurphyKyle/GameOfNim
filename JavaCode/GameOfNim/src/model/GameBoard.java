@@ -36,12 +36,15 @@ public class GameBoard {
 	public String toString() {
 		
 		StringBuilder sb = new StringBuilder();
+		int counter = 1;
 		
 		for(int num : rows){
-			
+			sb.append("Row: " + counter + "\t");
 			for (int i = 0; i < num; i++) {
 				sb.append("X");
 			}
+			sb.append("\n");
+			counter ++;
 		}
 		
 		return sb.toString();
