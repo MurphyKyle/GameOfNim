@@ -35,14 +35,15 @@ public class GameBoard {
 	@Override
 	public String toString() {
 		
+		StringBuilder sb = new StringBuilder();
+		
 		for(int num : rows){
 			
 			for (int i = 0; i < num; i++) {
-				System.out.println("X");
+				sb.append("X");
 			}
 		}
 		
-		
-		return "";
+		return sb.toString();
 	}
 }
