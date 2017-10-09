@@ -5,6 +5,8 @@ public class GameBoard {
 	private enums.Difficulty difficulty;
 	
 	public GameBoard(enums.Difficulty difficulty) {
+		
+		rows = difficulty.getRowTokenCounts();
 		this.difficulty = difficulty;
 	}
 	
