@@ -1,6 +1,7 @@
 package control;
 
 import java.io.IOException;
+import java.util.Random;
 
 import enums.Difficulty;
 import model.GameBoard;
@@ -18,9 +19,9 @@ public class NimController {
 	private static final int PLAYER_TWO_TURN_VAL = 1;
 
 	public static void runApp() throws IOException {
+		boolean again = true;
 		String playerChoice = "";
 		int executable = 0;
-		int turn = 0;
 		
 		String[] versus = {
 		"1) Player versus Player",
@@ -34,7 +35,7 @@ public class NimController {
 		};
 		
 		Console.writeLine("Hello, and welcome to the game of Nim");
-		while(true) {
+		while(again) {
 			do {
 				do {
 					Console.writeLine("Who will you be playing against: ");
@@ -50,6 +51,7 @@ public class NimController {
 				playerChoice = Console.promptUserForInput("What will be Player 1's name?");
 			}while(!isValidPlayerName(playerChoice));
 			players[0] = new Player(playerChoice);
+			players[0].setIsHumanPlayer(true);
 			
 			do {
 				if(executable == 2) {
@@ -82,28 +84,87 @@ public class NimController {
 				}
 			}while(executable != 1 & executable != 2);
 			
-			turn = executable - 1;
+			turnVal = executable - 1;
 			
 			do {
+				Console.writeLine(gameBoard.toString() + "\n");
 				playGame();
-			}while(!isGameOver());			
+			}while(!isGameOver());
+			
+			String[] end = {
+					"1) yes",
+					"2) no"
+			};
+			
+			Console.writeLine("Congradulations: " + players[turnVal].getName() + "\nPlay Again?");
+			playerChoice = Console.promptUserForMenuChoice(end);
+			
+			if(playerChoice.equals(2)) {
+				again = false;
+			}
 		}
 	}
 	private static void playGame() {
+
+		if (players[turnVal].getIsHumanPlayer()) {
+			String response = "";
+			String[] split = new String[2];
+			do {
+				do {
+					try {
+						response = Console.promptUserForInput(
+								players[turnVal] + ") Please input your action in to format: row, amount");
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				} while (!isValidMoveInput(response));
+
+				split = response.split(",");
+			} while (!isValidMove(Integer.parseInt(split[0])-1, Integer.parseInt(split[1])-1));
+			gameBoard.takeTokens(Integer.parseInt(split[0])-1, Integer.parseInt(split[1])-1);
+		} else {
+			int[] split = generateValidRandomMove();
+			gameBoard.takeTokens(split[0], split[1]);
+		}
 		
+		if(turnVal == 1) {
+			turnVal--;
+		} else {
+			turnVal++;
+		}
 	}
 	
 	private static boolean isValidMoveInput(String userInput) {
-		
+		String[] split = userInput.split(",");
+		try{
+			Integer.parseInt(split[0].trim());
+			Integer.parseInt(split[1].trim());
+			return true;
+		}catch(Exception e) {
+			Console.writeLine("\n!!! The format in which you input your action was incorrect !!!\n");
+			e.printStackTrace();
+		}
 		return false;
 	}
 	private static boolean isValidMove(int rowNumber, int tokenCount) {
-		
-		return true;
+		if(gameBoard.getNumOfRows() <= rowNumber-1 && gameBoard.getRowTokenValue(rowNumber) > 0) {
+			return true;
+		}
+		Console.writeLine("\n!!! The number's you input excede either the number of rows available !!!\n!!! or do not have Objects in which to take from. !!!\n");
+		return false;
 	}
 	private static int[] generateValidRandomMove() {
+		Random randalf = new Random();
 		
-		return null;
+		int rand = randalf.nextInt(gameBoard.getNumOfRows());
+		int amount = randalf.nextInt(gameBoard.getRowTokenValue(rand)-1)+1;
+		
+		int[] move = {
+				rand,
+				amount
+		};
+		
+		return move;
 	}
 	private static boolean isGameOver() {
 		boolean allEmpty = false;

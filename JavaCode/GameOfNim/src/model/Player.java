@@ -18,6 +18,9 @@ public class Player {
 	public void setIsHumanPlayer(boolean isHumanplayer) {
 		this.isHumanPlayer = isHumanplayer;
 	}
+	public boolean getIsHumanPlayer() {
+		return isHumanPlayer;
+	}
 	
 	@Override
 	public String toString() {
