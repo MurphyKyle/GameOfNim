@@ -18,6 +18,9 @@ public class NimController {
 	private static final int PLAYER_ONE_TURN_VAL = 0;
 	private static final int PLAYER_TWO_TURN_VAL = 1;
 
+	/*
+	 * The primary method for controlling the operation of the application
+	 */
 	public static void runApp() throws IOException {
 		boolean again = true;
 		String playerChoice = "";
@@ -104,6 +107,10 @@ public class NimController {
 			}
 		}
 	}
+	/*
+	 * Controls the logic for one single turn during game play. 
+	 * Controls interaction logic for either human or computer player and the gameBoard
+	 */
 	private static void playGame() {
 
 		if (players[turnVal].getIsHumanPlayer()) {
@@ -133,7 +140,10 @@ public class NimController {
 			turnVal++;
 		}
 	}
-	
+	/*
+	 * Determines if the String retrieved from the user can be parsed into a valid game move.
+	 * Input should be in a comma-separated format. (ie: “2, 4”)
+	 */
 	private static boolean isValidMoveInput(String userInput) {
 		String[] split = userInput.split(",");
 		try{
@@ -146,6 +156,11 @@ public class NimController {
 		}
 		return false;
 	}
+	/*
+	 * Determines if the desired move on the gameBoard is possible.
+	 * Checks that the rowNumber exists and that the tokenCount is within the acceptable range of that rowNumber.
+	 * Which is 1-(n), where (n) is the number of tokens currently in that rowNumber
+	 */
 	private static boolean isValidMove(int rowNumber, int tokenCount) {
 		if(gameBoard.getNumOfRows() <= rowNumber-1 && gameBoard.getRowTokenValue(rowNumber) > 0) {
 			return true;
@@ -153,6 +168,9 @@ public class NimController {
 		Console.writeLine("\n!!! The number's you input excede either the number of rows available !!!\n!!! or do not have Objects in which to take from. !!!\n");
 		return false;
 	}
+	/*
+	 * Randomly generates a move which will be both valid and possible during the current game state
+	 */
 	private static int[] generateValidRandomMove() {
 		Random randalf = new Random();
 		
@@ -166,6 +184,9 @@ public class NimController {
 		
 		return move;
 	}
+	/*
+	 * Checks if the current player took the last token
+	 */
 	private static boolean isGameOver() {
 		boolean allEmpty = false;
 		for(int i = 0; i < gameBoard.getNumOfRows(); i++) {
@@ -177,6 +198,11 @@ public class NimController {
 		}
 		return allEmpty;
 	}
+	/*
+	 * Determines if the user’s input is able to be parsed into a
+				Difficulty Enum value
+
+	 */
 	private static boolean isValidDifficultyChoice(String userInput) {
 		
 		switch(userInput) {
@@ -199,6 +225,9 @@ public class NimController {
 		}
 		return true;
 	}
+	/*
+	 * Determines if the user’s input is not null nor empty
+	 */
 	private static boolean isValidPlayerName(String userInput) {
 		userInput.trim();
 		if(userInput.length() > 0 && userInput != null) {
@@ -207,6 +236,9 @@ public class NimController {
 		Console.writeLine("\n!!! We did not recieve any input. Please be sure to input something !!!\n");
 		return false;
 	}
+	/*
+	 * Determines if the user’s input can be parsed into an
+	 */
 	private static boolean isValidInt(String userInput) {
 		try {
 			int check = Integer.parseInt(userInput);
