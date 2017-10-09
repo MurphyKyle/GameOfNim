@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-import javafx.application.Application;
+//import javafx.application.Application;
 
 public class Console {	
 	public static void main(String[] args) {
