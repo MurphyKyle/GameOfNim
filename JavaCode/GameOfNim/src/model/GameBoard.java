@@ -22,7 +22,12 @@ public class GameBoard {
 		return num;
 	}
 	public void takeTokens(int rowNumber, int numOfTokens) {
-		rows[rowNumber] -= numOfTokens;
+		
+		if(numOfTokens > rows[rowNumber]){
+			throw new IllegalArgumentException("Broke inside the game board model, validation broke inside the Nim Controller");
+		}else{
+			rows[rowNumber] -= numOfTokens;
+		}
 	}
 	
 	@Override
