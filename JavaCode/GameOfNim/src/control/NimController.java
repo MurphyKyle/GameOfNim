@@ -30,7 +30,7 @@ public class NimController {
 
 		String[] difficulty = { "1) Easy 2 x 2", "2) Medium 2 x 5 x 7", "3) Hard 2 x 3 x 8 x 9" };
 
-		Console.writeLine("Hello, and welcome to the game of Nim");
+		instructionBox.show();
 		while (again) {
 			do {
 				do {
@@ -91,7 +91,7 @@ public class NimController {
 			Console.writeLine("Congradulations: " + players[turnVal].getName() + "\nPlay Again?");
 			playerChoice = Console.promptUserForMenuChoice(end);
 
-			if (playerChoice.equals(2)) {
+			if (playerChoice.equals("2")) {
 				again = false;
 			}
 		}
@@ -105,16 +105,15 @@ public class NimController {
 
 		if (players[turnVal].getIsHumanPlayer()) {
 			String response = "";
-			String[] split = new String[2];
+			String[] split;
 			do {
 				do {
 					response = Console.promptUserForInput(
-							players[turnVal] + ") Please input your action in to format: row, amount");
+							players[turnVal].getName() + ") Please input your action in to format: row, amount");
 				} while (!isValidMoveInput(response));
-
 				split = response.split(",");
-			} while (!isValidMove(Integer.parseInt(split[0].trim()), Integer.parseInt(split[1].trim())));
-			gameBoard.takeTokens(Integer.parseInt(split[0].trim()), Integer.parseInt(split[1].trim()));
+			} while (!isValidMove(Integer.parseInt(split[0].trim()) - 1, Integer.parseInt(split[1].trim())));
+			gameBoard.takeTokens(Integer.parseInt(split[0].trim()) - 1, Integer.parseInt(split[1].trim()));
 		} else {
 			int[] split = generateValidRandomMove();
 			gameBoard.takeTokens(split[0], split[1]);
@@ -139,7 +138,6 @@ public class NimController {
 			return true;
 		} catch (Exception e) {
 			Console.writeLine("\n!!! The format in which you input your action was incorrect !!!\n");
-			e.printStackTrace();
 		}
 		return false;
 	}
@@ -151,11 +149,12 @@ public class NimController {
 	 * in that rowNumber
 	 */
 	private static boolean isValidMove(int rowNumber, int tokenCount) {
-		if (gameBoard.getNumOfRows() <= rowNumber && gameBoard.getRowTokenValue(rowNumber) >= 0) {
+		if (rowNumber >= 0 && rowNumber <= gameBoard.getNumOfRows() && gameBoard.getRowTokenValue(rowNumber) > 0
+				&& tokenCount > 0 && tokenCount <= gameBoard.getRowTokenValue(rowNumber)) {
 			return true;
 		}
 		Console.writeLine(
-				"\n!!! The number's you input excede either the number of rows available !!!\n!!! or do not have Objects in which to take from. !!!\n");
+				"\n!!! The number's you input excede either the number of rows available !!!\n!!! or has inadiquate number of Objects in which to take. !!!\n");
 		return false;
 	}
 
@@ -165,11 +164,14 @@ public class NimController {
 	 */
 	private static int[] generateValidRandomMove() {
 		Random randalf = new Random();
+		int row;
 
-		int rand = randalf.nextInt(gameBoard.getNumOfRows());
-		int amount = randalf.nextInt(gameBoard.getRowTokenValue(rand) - 1) + 1;
+		do {
+			row = randalf.nextInt(gameBoard.getNumOfRows());
+		} while (gameBoard.getRowTokenValue(row) == 0);
+		int amount = randalf.nextInt(gameBoard.getRowTokenValue(row)) + 1;
 
-		int[] move = { rand, amount };
+		int[] move = { row, amount };
 
 		return move;
 	}
