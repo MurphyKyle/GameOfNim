@@ -41,7 +41,7 @@ public class InstructionBox {
 		sb.append("Instructions for gameplay:<br><br>");
 		sb.append("You must take no less than one token, and can take no more than what is currently in that row<br><br>");
 		sb.append("The tokens must be taken out of one single row each turn<br><br>");
-		sb.append("The loser is the player who takes the last token on the game<br>");
+		sb.append("The loser is the player who takes the last token on the game board<br>");
 		sb.append("</html>");
 		
 		JLabel lblInstructions = new JLabel();
